@@ -1,18 +1,22 @@
 package com.mycompany.garmentmanagementsystem;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class GarmentManagementSystem {
 
     public static void main(String[] args) {
+        // Example main code for user interaction
         Scanner scanner = new Scanner(System.in);
         Inventory inventory = new Inventory();
 
+        // Example garments to add to inventory
         inventory.addGarment(new Garment("G001", "T-Shirt", "Cotton T-Shirt", "L", "Red", 20.0, 10));
         inventory.addGarment(new Garment("G002", "Jeans", "Blue Denim Jeans", "M", "Blue", 40.0, 5));
 
+        // Main loop for user interaction
         while (true) {
             System.out.println("1. Add Garment");
             System.out.println("2. Update Garment Stock");
@@ -119,6 +123,73 @@ public class GarmentManagementSystem {
                     System.out.println("ID: " + garment.id + ", Name: " + garment.name + ", Price: " + garment.price + ", Stock: " + garment.stockQuantity);
                 }
             }
+        }
+    }
+
+    static class Fabric {
+        String id;
+        String type;
+        String color;
+        double pricePerMeter;
+
+        public Fabric(String id, String type, String color, double pricePerMeter) {
+            this.id = id;
+            this.type = type;
+            this.color = color;
+            this.pricePerMeter = pricePerMeter;
+        }
+
+        double calculateCost(double meters) {
+            return meters * pricePerMeter;
+        }
+    }
+
+    static class Supplier {
+        String id;
+        String name;
+        String contactInfo;
+        List<Fabric> suppliedFabrics;
+
+        public Supplier(String id, String name, String contactInfo) {
+            this.id = id;
+            this.name = name;
+            this.contactInfo = contactInfo;
+            this.suppliedFabrics = new ArrayList<>();
+        }
+
+        void addFabric(Fabric fabric) {
+            suppliedFabrics.add(fabric);
+        }
+
+        List<Fabric> getSuppliedFabrics() {
+            return suppliedFabrics;
+        }
+    }
+
+    static class Order {
+        String orderId;
+        Date orderDate;
+        List<Garment> garments;
+        double totalAmount;
+
+        public Order(String orderId, Date orderDate) {
+            this.orderId = orderId;
+            this.orderDate = orderDate;
+            this.garments = new ArrayList<>();
+            this.totalAmount = 0;
+        }
+
+        void addGarment(Garment garment) {
+            garments.add(garment);
+        }
+
+        double calculateTotalAmount() {
+            totalAmount = garments.stream().mapToDouble(g -> g.price).sum();
+            return totalAmount;
+        }
+
+        void printOrderDetails() {
+            System.out.println("Order ID: " + orderId + ", Order Date: " + orderDate + ", Total Amount: " + totalAmount);
         }
     }
 }
