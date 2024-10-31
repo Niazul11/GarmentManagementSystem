@@ -8,20 +8,19 @@ import java.util.Scanner;
 public class GarmentManagementSystem {
 
     public static void main(String[] args) {
-        // Example main code for user interaction
+
         Scanner scanner = new Scanner(System.in);
         Inventory inventory = new Inventory();
 
-        // Example garments to add to inventory
         inventory.addGarment(new Garment("G001", "T-Shirt", "Cotton T-Shirt", "L", "Red", 20.0, 10));
         inventory.addGarment(new Garment("G002", "Jeans", "Blue Denim Jeans", "M", "Blue", 40.0, 5));
 
-        // Main loop for user interaction
         while (true) {
             System.out.println("1. Add Garment");
             System.out.println("2. Update Garment Stock");
             System.out.println("3. View All Garments");
-            System.out.println("4. Exit");
+            System.out.println("4. Place Order");
+            System.out.println("5. Exit");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -63,6 +62,26 @@ public class GarmentManagementSystem {
                     break;
 
                 case 4:
+                    System.out.print("Enter Order ID: ");
+                    String orderId = scanner.nextLine();
+                    Order order = new Order(orderId, new Date());
+                    System.out.print("Enter number of garments to add to order: ");
+                    int garmentCount = scanner.nextInt();
+                    for (int i = 0; i < garmentCount; i++) {
+                        System.out.print("Enter Garment ID: ");
+                        String garmentId = scanner.next();
+                        for (Garment g : inventory.garments) {
+                            if (g.id.equals(garmentId)) {
+                                order.addGarment(g);
+                                break;
+                            }
+                        }
+                    }
+                    System.out.println("Total Order Amount: " + order.calculateTotalAmount());
+                    order.printOrderDetails();
+                    break;
+
+                case 5:
                     System.out.println("Exiting...");
                     scanner.close();
                     return;
