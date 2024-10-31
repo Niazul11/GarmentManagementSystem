@@ -8,12 +8,11 @@ import java.util.Scanner;
 public class GarmentManagementSystem {
 
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
         Inventory inventory = new Inventory();
 
-        inventory.addGarment(new Garment("G001", "T-Shirt", "Cotton T-Shirt", "L", "Red", 20.0, 10));
-        inventory.addGarment(new Garment("G002", "Jeans", "Blue Denim Jeans", "M", "Blue", 40.0, 5));
+        inventory.addGarment(new Garment("G001", "T-Shirt", "Cotton T-Shirt", "L", "Red", 1000.0, 20));
+        inventory.addGarment(new Garment("G002", "Jeans", "Blue Denim Jeans", "M", "Blue", 750.0, 12));
 
         while (true) {
             System.out.println("1. Add Garment");
@@ -43,7 +42,6 @@ public class GarmentManagementSystem {
                     System.out.print("Stock Quantity: ");
                     int stockQuantity = scanner.nextInt();
                     scanner.nextLine();
-
                     Garment garment = new Garment(id, name, description, size, color, price, stockQuantity);
                     inventory.addGarment(garment);
                     System.out.println("Garment added successfully!");
@@ -78,7 +76,7 @@ public class GarmentManagementSystem {
                         }
                     }
                     System.out.println("Total Order Amount: " + order.calculateTotalAmount());
-                    order.printOrderDetails();
+                    order.printInvoice();
                     break;
 
                 case 5:
@@ -207,8 +205,18 @@ public class GarmentManagementSystem {
             return totalAmount;
         }
 
-        void printOrderDetails() {
-            System.out.println("Order ID: " + orderId + ", Order Date: " + orderDate + ", Total Amount: " + totalAmount);
+        void printInvoice() {
+            System.out.println("Invoice for Order ID: " + orderId);
+            System.out.println("Order Date: " + orderDate);
+            System.out.println("-----------------------------------------------------");
+            System.out.printf("%-10s %-20s %-10s %-10s%n", "ID", "Name", "Quantity", "Price");
+            System.out.println("-----------------------------------------------------");
+            for (Garment garment : garments) {
+                System.out.printf("%-10s %-20s %-10d %-10.2f%n", garment.id, garment.name, 1, garment.price);
+            }
+            System.out.println("-----------------------------------------------------");
+            System.out.printf("Total Amount: %.2f%n", calculateTotalAmount());
+            System.out.println("Thank you for your order!");
         }
     }
 }
