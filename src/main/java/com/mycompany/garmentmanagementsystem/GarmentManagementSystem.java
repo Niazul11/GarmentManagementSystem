@@ -216,7 +216,7 @@ public class GarmentManagementSystem {
             }
             System.out.println("-----------------------------------------------------");
             System.out.printf("Total Amount: %.2f%n", calculateTotalAmount());
-            System.out.println("Thank you for your order!");
+            System.out.println("Thank you for your order!!!");
         }
     }
 }
