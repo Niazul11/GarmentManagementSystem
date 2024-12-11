@@ -1,10 +1,9 @@
-# Garment Management System
+Employee Management System
+Description
+The Employee Management System is a Java-based desktop application that allows users to manage employee records. It features a user-friendly GUI built using Java Swing and integrates with a MySQL database for data storage and retrieval.
 
-## Description
-A Java-based garment management system that allows users to add garments, update stock, view available garments, and place orders. This system is designed to streamline the management of garment inventory and sales.
-
-## Features
-- Add new garments with details such as ID, name, description, size, color, price, and stock quantity.
-- Update the stock quantity of existing garments.
-- View all available garments in the inventory.
-- Place orders for garments and generate invoices.
+Features
+Add new employee records (Name, Address, Email, etc.).
+Automatically generate Employee IDs.
+Store data securely in a MySQL database.
+Navigate between forms with ease.
